@@ -8,9 +8,9 @@
   "scripts": {
     "build": "tsc",
     "test": "jest",
-    "app": "ts-node app.ts",
     "install": "deepkit-type-install",
-    "app:watch": "node --watch -r ts-node/register app.ts",
+    "web-api": "ts-node src/apps/web-api/app.ts",
+    "web-api:watch": "node --watch -r ts-node/register src/apps/web-api/app.ts",
     "update-deepkit": "npx update-by-scope @deepkit",
     "client-rpc": "ts-node client-rpc.ts"
   },
