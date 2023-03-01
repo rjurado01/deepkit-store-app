@@ -101,3 +101,9 @@ To change the port or host, use `APP_FRAMEWORK_PORT` and `APP_FRAMEWORK_HOST` re
 $ APP_FRAMEWORK_PORT=9090 APP_FRAMEWORK_HOST=127.0.0.1 node dist/app.js server:start
 2022-08-07T21:38:45.744Z [LOG] HTTP listening at http://127.0.0.1:9090
 ```
+
+## Libs
+
+* https://github.com/koskimas/kysely
+* https://knexjs.org/
+* https://docs.deepkit.io/

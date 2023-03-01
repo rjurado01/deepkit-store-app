@@ -36,15 +36,17 @@
     "@deepkit/template": "^1.0.1-alpha.72",
     "@deepkit/type": "^1.0.1-alpha.72",
     "@deepkit/type-compiler": "^1.0.1-alpha.72",
-    "@deepkit/workflow": "^1.0.1-alpha.72"
+    "@deepkit/workflow": "^1.0.1-alpha.72",
+    "blinkdb": "^0.9.0",
+    "rxjs": "^7.8.0"
   },
   "devDependencies": {
+    "@types/jest": "^28.1.6",
     "faker": "^5.5.3",
-    "typescript": "^4.8.2",
     "jest": "^28.1.3",
     "ts-jest": "^28.0.7",
-    "@types/jest": "^28.1.6",
-    "ts-node": "^10.9.1"
+    "ts-node": "^10.9.1",
+    "typescript": "^4.8.2"
   },
   "jest": {
     "transform": {
