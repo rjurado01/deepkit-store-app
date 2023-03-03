@@ -1,30 +1,34 @@
-import {count, createTable, insert, many} from "blinkdb";
-import {BlinkDbClient} from "../../shared/infra/blink-db-client";
 import {ProductCriteria} from "../domain/product.criteria";
 import {Product} from "../domain/product.entity";
 import {ProductRepository} from "../domain/product.repository";
 
-interface ProductTable extends Product {
-  id: string 
-  search: string
-}
-
 export class ProductInMemeoryRepository implements ProductRepository {
-  private readonly table
-
-  constructor(private readonly dbClient: BlinkDbClient) {
-    this.table = createTable<ProductTable>(dbClient.db, 'products')()
-  }
+  private products: Product[]
 
   findAll(query?: ProductCriteria | undefined): Promise<Product[]> {
-    return many(this.table, {where: query?.filter})
+    let result = this.products
+
+    if (query?.filter) {
+      result = result.filter(item => {
+        const id = !query.filter?.id || item.id === query.filter.id 
+        const search = !query.filter?.search || item.name === query.filter.search 
+
+        return id && search
+      })
+    }
+
+    return Promise.resolve(this.products)
   }
 
   count(_query?: ProductCriteria | undefined): Promise<number> {
-    return count(this.table) 
+    return Promise.resolve(this.products.length) 
   }
 
-  async create(product: Product) {
-    await insert(this.table, {...product, search: product.name}) 
+  async create(product: Product): Promise<void> {
+    this.products.push(product)
+  }
+
+  async clear() {
+    this.products = []
   }
 }

@@ -37,7 +37,6 @@
     "@deepkit/type": "^1.0.1-alpha.72",
     "@deepkit/type-compiler": "^1.0.1-alpha.72",
     "@deepkit/workflow": "^1.0.1-alpha.72",
-    "blinkdb": "^0.9.0",
     "rxjs": "^7.8.0"
   },
   "devDependencies": {
@@ -55,6 +54,11 @@
     "testEnvironment": "node",
     "testMatch": [
       "**/*.spec.ts"
-    ]
+    ],
+    "globals": {
+      "ts-jest": {
+        "isolatedModules": true
+      }
+    }
   }
 }

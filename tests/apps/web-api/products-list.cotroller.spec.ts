@@ -8,7 +8,7 @@ import {ProductsListController} from '../../../src/apps/web-api/controllers/prod
 import {ListProductsService} from '../../../src/core/products/app/list-products.service'
 import {ProductRepository} from '../../../src/core/products/domain/product.repository'
 import {ProductInMemeoryRepository} from '../../../src/core/products/infra/product-in-memery.repository'
-import {BlinkDbClient} from '../../../src/core/shared/infra/blink-db-client'
+// import {BlinkDbClient} from '../../../src/core/shared/infra/blink-db-client'
 
 describe('ProductsListController', () => {
   let testing: TestingFacade<any>
@@ -16,16 +16,10 @@ describe('ProductsListController', () => {
   let dbClient: BlinkDbClient
 
   beforeAll(async () => {
-    testing = createTestingApp({
-      controllers: [ProductsListController],
-      providers: [
-        BlinkDbClient,
-        ListProductsService,
-        provide<ProductRepository>(ProductInMemeoryRepository),
-      ]
-    })
-
+    console.time()
+    testing = createTestingApp({})
     await testing.startServer()
+    console.timeEnd()
 
     const app: App<any> = testing.app
 

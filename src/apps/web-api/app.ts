@@ -6,7 +6,6 @@ import {JSONTransport, Logger} from '@deepkit/logger'
 import {ListProductsService} from '../../core/products/app/list-products.service'
 import {ProductRepository} from '../../core/products/domain/product.repository'
 import {ProductInMemeoryRepository} from '../../core/products/infra/product-in-memery.repository'
-import {BlinkDbClient} from '../../core/shared/infra/blink-db-client'
 
 import {AppConfig} from './config'
 import {ProductsListController} from './controllers/products-list.controller'
@@ -20,8 +19,6 @@ const x = new App({
     ListProductsService,
 
     provide<ProductRepository>(ProductInMemeoryRepository),
-
-    BlinkDbClient,
   ],
   imports: [new FrameworkModule({ debug: true })]
 })
