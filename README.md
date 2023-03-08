@@ -107,3 +107,4 @@ $ APP_FRAMEWORK_PORT=9090 APP_FRAMEWORK_HOST=127.0.0.1 node dist/app.js server:s
 * https://github.com/koskimas/kysely
 * https://knexjs.org/
 * https://docs.deepkit.io/
+* https://www.npmjs.com/package/tsconfig-paths

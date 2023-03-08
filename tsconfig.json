@@ -10,5 +10,10 @@
     "strictPropertyInitialization": false
   },
   "reflection": true,
-  "include": ["src/**/*"]
+  "include": ["src/**/*"],
+  "baseUrl": "./src",
+  "paths": {
+    "@core/*": ["core/*"],
+    "@lib/*": ["lib/*"]
+  }
 }

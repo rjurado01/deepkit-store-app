@@ -1,16 +1,35 @@
-import { UUID, validate } from '@deepkit/type';
+import {IsNotEmpty, IsNumber, IsOptional, IsString, IsUUID} from 'class-validator';
+import {Entity} from '../../shared/domain/entity';
 
-export class Product {
-  readonly id: UUID 
+export class Product extends Entity<Product> {
+  @IsUUID()
+  @IsNotEmpty()
+  readonly id: string 
+
+  @IsString()
+  @IsNotEmpty()
   readonly name: string
+
+  @IsNumber()
+  @IsNotEmpty()
   readonly price: number
+
+  @IsString()
+  @IsOptional()
   readonly description?: string
 
-  constructor(data: Partial<Product>) {
-    const errors = validate<Product>(data)
+  // METHODS
 
-    if (errors.length) throw new Error(`Invalid Product: ${errors}`)
+  properties(): PropertyNames<Product>[] {
+    return [
+      'id',
+      'name',
+      'price',
+      'description',
+    ]
+  }
 
-    Object.assign(this, data)
+  update(data: Omit<Properties<Product>, 'id'>) {
+    this.assignPick(data, ['name', 'price', 'description'])
   }
 }
