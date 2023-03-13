@@ -2,9 +2,9 @@ import 'reflect-metadata'
 
 import {ContainerBuilder} from 'diod'
 import express from 'express'
-import {ListProductsService} from '../../core/products/app/list-products.service'
-import {ProductRepository} from '../../core/products/domain/product.repository'
-import {ProductInMemeoryRepository} from '../../core/products/infra/product-in-memery.repository'
+import {ListProductsService} from '@core/products/app/list-products.service'
+import {ProductRepository} from '@core/products/domain/product.repository'
+import {ProductInMemeoryRepository} from '@core/products/infra/product-in-memery.repository'
 import {ProductsListController} from './controllers/products-list.controller'
 
 const app = express()

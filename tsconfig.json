@@ -8,13 +8,16 @@
     "target": "ES2020",
     "module": "CommonJS",
     "moduleResolution": "node",
-    "strictPropertyInitialization": false
+    "strictPropertyInitialization": false,
+    "baseUrl": "./src",
+    "paths": {
+      "@core/*": ["core/*"],
+      "@lib/*": ["lib/*"]
+    }
   },
   "reflection": true,
   "include": ["src/**/*"],
-  "baseUrl": "./src",
-  "paths": {
-    "@core/*": ["core/*"],
-    "@lib/*": ["lib/*"]
+  "ts-node": {
+    "require": ["tsconfig-paths/register"]
   }
 }
