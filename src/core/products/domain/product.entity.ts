@@ -1,10 +1,16 @@
-import {IsNotEmpty, IsNumber, IsOptional, IsString, IsUUID} from 'class-validator';
-import {Entity} from '../../shared/domain/entity';
+import {
+  IsNotEmpty,
+  IsNumber,
+  IsOptional,
+  IsString,
+  IsUUID,
+} from 'class-validator'
+import {Entity} from '../../shared/domain/entity'
 
 export class Product extends Entity<Product> {
   @IsUUID()
   @IsNotEmpty()
-  readonly id: string 
+  readonly id: string
 
   @IsString()
   @IsNotEmpty()
@@ -21,12 +27,7 @@ export class Product extends Entity<Product> {
   // METHODS
 
   properties(): PropertyNames<Product>[] {
-    return [
-      'id',
-      'name',
-      'price',
-      'description',
-    ]
+    return ['id', 'name', 'price', 'description']
   }
 
   update(data: Omit<Properties<Product>, 'id'>) {

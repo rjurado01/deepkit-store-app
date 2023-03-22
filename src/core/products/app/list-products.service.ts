@@ -7,6 +7,7 @@ export class ListProductsService {
   constructor(private readonly repository: ProductRepository) {}
 
   async run(query: ProductCriteria) {
+    console.log(query)
     const data = await this.repository.findAll(query)
     const count = await this.repository.count(query)
 

@@ -12,9 +12,7 @@
   },
   "reflection": true,
   "include": ["src/**/*"],
-  "baseUrl": "./src",
-  "paths": {
-    "@core/*": ["core/*"],
-    "@lib/*": ["lib/*"]
+  "ts-node": {
+    "files": true
   }
 }

@@ -6,6 +6,17 @@ import {ListProductsService} from '../../core/products/app/list-products.service
 import {ProductRepository} from '../../core/products/domain/product.repository'
 import {ProductInMemeoryRepository} from '../../core/products/infra/product-in-memery.repository'
 import {ProductsListController} from './controllers/products-list.controller'
+import {ProductCriteria} from '../../core/products/domain/product.criteria'
+
+import {z} from 'zod'
+
+const User = z.object({
+  username: z.coerce.string(),
+  age: z.coerce.number(),
+})
+
+const u = User.parse({username: 2, age: '12'})
+console.log(u)
 
 const app = express()
 const port = 3000
@@ -20,9 +31,9 @@ app.get('/', (_req, res) => {
   res.send('Hello World 2!')
 })
 
-app.get('/products', async (_req, res) => {
+app.get('/products', async (req, res) => {
   const controller = container.get(ProductsListController)
-  const result = await controller.run({})
+  const result = await controller.run(new ProductCriteria(req.query))
 
   res.send(result)
 })

@@ -1,9 +1,7 @@
 import {validateSync} from 'class-validator'
 import {pick} from '../../../lib/utils'
 
-export abstract class Entity<T> {
-  id: string
-
+export abstract class Dto<T> {
   abstract properties(): PropertyNames<T>[]
 
   protected assign(data: PartialProperties<T>): void {
