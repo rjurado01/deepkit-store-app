@@ -1,12 +1,12 @@
 import {AttrError, AttrErrorCode} from '../validation/attr-error'
 
-export interface IntegerConfig {
+export interface FloatConfig {
   optional?: boolean
   min?: number
   max?: number
 }
 
-function checkPresence(val: any, config: IntegerConfig) {
+function checkPresence(val: any, config: FloatConfig) {
   if (config.optional) return
 
   if (val === undefined || val === null) {
@@ -20,19 +20,19 @@ function checkType(val: any) {
   }
 }
 
-function checkMax(val: number, config: IntegerConfig) {
+function checkMax(val: number, config: FloatConfig) {
   if (config.max && val > config.max) {
     throw new AttrError(AttrErrorCode.GreaterThanMax)
   }
 }
 
-function checkMin(val: number, config: IntegerConfig) {
+function checkMin(val: number, config: FloatConfig) {
   if (config.min && val < config.min) {
     throw new AttrError(AttrErrorCode.LessThanMin)
   }
 }
 
-export function checkInteger(val: any, config: IntegerConfig) {
+export function checkFloat(val: any, config: FloatConfig) {
   checkPresence(val, config)
   checkType(val)
   checkMax(val, config)

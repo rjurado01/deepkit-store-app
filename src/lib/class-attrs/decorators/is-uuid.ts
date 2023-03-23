@@ -1,10 +1,7 @@
 import {AttrType} from '../constants'
+import {UuidConfig} from '../validators/uuid'
 import {attr} from './attr'
 
-type Options = {
-  optional?: boolean
-}
-
-export function isUuid(options: Options = {}) {
-  return attr(AttrType.Uuid, options)
+export function isUuid(config: UuidConfig = {}) {
+  return attr(AttrType.Uuid, config)
 }

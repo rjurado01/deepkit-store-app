@@ -1,36 +1,26 @@
 import {
-  IsNotEmpty,
-  IsNumber,
-  IsOptional,
-  IsString,
-  IsUUID,
-} from 'class-validator'
-import {Entity} from '../../shared/domain/entity'
+  isFloat,
+  isString,
+  isUuid,
+  ValidatedClass,
+} from '../../../lib/class-attrs'
 
-export class Product extends Entity<Product> {
-  @IsUUID()
-  @IsNotEmpty()
+export class Product extends ValidatedClass<Product> {
+  @isUuid()
   readonly id: string
 
-  @IsString()
-  @IsNotEmpty()
+  @isString()
   readonly name: string
 
-  @IsNumber()
-  @IsNotEmpty()
+  @isFloat()
   readonly price: number
 
-  @IsString()
-  @IsOptional()
+  @isString()
   readonly description?: string
 
   // METHODS
 
-  properties(): PropertyNames<Product>[] {
-    return ['id', 'name', 'price', 'description']
-  }
-
   update(data: Omit<Properties<Product>, 'id'>) {
-    this.assignPick(data, ['name', 'price', 'description'])
+    this.assign(data, ['name', 'price', 'description'])
   }
 }
