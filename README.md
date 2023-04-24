@@ -109,6 +109,8 @@ $ APP_FRAMEWORK_PORT=9090 APP_FRAMEWORK_HOST=127.0.0.1 node dist/app.js server:s
 
 ### Recursos
 
+* Crear sesión: `POST /sessions`
+* Obtener estadísticas: `GET /stats`
 * Listado de productos: `GET /products`
 * Crear un producto: `POST /products`
 * Editar un producto: `PUT /products/:id`

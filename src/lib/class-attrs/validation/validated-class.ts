@@ -45,7 +45,6 @@ export class ValidatedClass<T> {
     }
 
     if (errors.length > 0) {
-      console.dir(errors)
       throw new ClassValidationError('Invalid...', errors)
     }
   }

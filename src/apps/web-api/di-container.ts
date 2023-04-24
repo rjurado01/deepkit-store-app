@@ -16,7 +16,9 @@ import {ProductsListController} from './controllers/products-list.controller'
 import {ProductsShowController} from './controllers/products-show.controller'
 import {ProductsUpdateController} from './controllers/products-update.controller'
 import {SessionsCreateController} from './controllers/sessions-create.controller'
+import {StatsShowController} from './controllers/stats-show.controller'
 import {CreateSessionService} from './services/create-session.service'
+import {ShowStatsService} from './services/show-stats.service'
 
 function registerProductModule(builder: ContainerBuilder) {
   builder.register(ProductRepository).use(ProductInMemeoryRepository).asSingleton()
@@ -46,11 +48,18 @@ function registerAuthModule(builder: ContainerBuilder) {
   builder.registerAndUse(SessionsCreateController)
 }
 
+function registerGeneralModule(builder: ContainerBuilder) {
+  builder.registerAndUse(ShowStatsService)
+
+  builder.registerAndUse(StatsShowController)
+}
+
 const builder = new ContainerBuilder()
 
 registerProductModule(builder)
 registerUserModule(builder)
 registerAuthModule(builder)
+registerGeneralModule(builder)
 
 const container = builder.build()
 

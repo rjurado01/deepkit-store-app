@@ -9,6 +9,7 @@ import {authRouter} from './routes/auth.route'
 import {CriteriaValidationError} from '../../core/shared/domain/criteria'
 import {ClassValidationError} from '../../lib/class-attrs/validation/attr-error'
 import {NotFoundError} from '../../core/shared/domain/not-found.error'
+import {generalRouter} from './routes/general.route'
 
 const app = express()
 const router = Router()
@@ -23,6 +24,7 @@ router.get('/', (_req, res) => {
 
 productsRouter.register(router)
 authRouter.register(router)
+generalRouter.register(router)
 
 router.use((err: unknown, _req: any, res: any, _next: unknown) => {
   if (err instanceof CriteriaValidationError) {

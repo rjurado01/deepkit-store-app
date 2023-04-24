@@ -26,7 +26,6 @@ export class UserInMemeoryRepository implements UserRepository {
   }
 
   findOne(filter: UserFilter): Promise<User> {
-    console.log(filter)
     const item = this.applyFilter(filter, this.users)[0]
 
     if (!item) throw new UserNotFoundError(filter)
