@@ -1,4 +1,5 @@
 import {isInstance, isString, isUuid, ValidatedClass} from '../../../lib/class-attrs'
+import {CriteriaPage} from '../../shared/domain/criteria'
 
 export class UserFilter extends ValidatedClass<UserFilter> {
   @isUuid({optional: true})
@@ -11,4 +12,7 @@ export class UserFilter extends ValidatedClass<UserFilter> {
 export class UserCriteria extends ValidatedClass<UserCriteria> {
   @isInstance({of: UserFilter, optional: true, cast: true})
   readonly filter?: UserFilter
+
+  @isInstance({of: CriteriaPage, optional: true, cast: true})
+  readonly page?: CriteriaPage
 }

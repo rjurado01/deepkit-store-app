@@ -17,7 +17,7 @@ export class ListProductsService {
 
   async run(query: ProductCriteria): Promise<ListProductsView> {
     const data = await this.repository.findAll(query)
-    const count = await this.repository.count(query)
+    const count = await this.repository.count(query.filter)
 
     return {
       data: data.map(this.mapProductToView),

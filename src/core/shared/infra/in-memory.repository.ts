@@ -1,6 +1,11 @@
 interface Criteria {
-  filter: {
-    id: string
+  filter?: {
+    id?: string
+  }
+
+  page?: {
+    size?: number
+    number?: number
   }
 }
 
@@ -8,14 +13,18 @@ interface Entity {
   id: string
 }
 
-export abstract class InMemeoryRepository<E extends Entity, C extends Criteria> {
-  private items: E[] = []
+export abstract class InMemoryRepository<E extends Entity, C extends Criteria> {
+  protected items: E[] = []
 
   findAll(query?: C | undefined): Promise<E[]> {
     let result = this.items
 
     if (query?.filter) {
       result = this.applyFilter(query.filter, result)
+    }
+
+    if (query?.page) {
+      result = this.applyPagination(query.page, result)
     }
 
     return Promise.resolve(result)
@@ -56,6 +65,13 @@ export abstract class InMemeoryRepository<E extends Entity, C extends Criteria> 
   }
 
   protected abstract applyFilter(filter: C['filter'], items: E[]): E[]
+
+  protected applyPagination(page: C['page'], items: E[]): E[] {
+    const number = (page?.number || 1) - 1
+    const size = page?.size || 5
+
+    return items.slice(size * number, size * (number + 1))
+  }
 
   protected abstract notFound(filter: C['filter']): void
 

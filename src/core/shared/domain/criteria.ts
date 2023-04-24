@@ -1,7 +1,15 @@
-import {ValidatedClass} from '../../../lib/class-attrs'
+import {isInteger, ValidatedClass} from '../../../lib/class-attrs'
 import {ClassValidationError} from '../../../lib/class-attrs/validation/attr-error'
 
 export class CriteriaValidationError extends ClassValidationError {}
+
+export class CriteriaPage extends ValidatedClass<CriteriaPage> {
+  @isInteger({min: 1, optional: true, cast: true})
+  size?: number
+
+  @isInteger({min: 1, max: 50, optional: true, cast: true})
+  number?: number
+}
 
 export class Criteria<T> extends ValidatedClass<T> {
   readonly filter?: unknown
