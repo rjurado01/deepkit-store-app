@@ -1,7 +1,7 @@
 import {Service} from 'diod'
 import {Request, Response} from 'express'
-import {ShowProductService} from '../../../core/products/app/show-product.service'
-import {ProductFilter} from '../../../core/products/domain/product.criteria'
+import {ShowProductService} from '../../../core/product/app/show-product.service'
+import {ProductFilter} from '../../../core/product/domain/product.criteria'
 
 @Service()
 export class ProductsShowController {

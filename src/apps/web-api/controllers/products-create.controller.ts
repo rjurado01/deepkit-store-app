@@ -3,7 +3,7 @@ import {Request, Response} from 'express'
 import {
   CreateProductDto,
   CreateProductService,
-} from '../../../core/products/app/create-product.service'
+} from '../../../core/product/app/create-product.service'
 
 import {injectable} from '../../../shared/decorators/injectable'
 

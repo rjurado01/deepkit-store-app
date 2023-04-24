@@ -27,3 +27,15 @@ export const assignPick = <T extends object>(
 ): void => {
   Object.assign(object, pick(data, keys))
 }
+
+export function catchError(error: any, run: () => any, catchFun: () => any) {
+  try {
+    return run()
+  } catch (err) {
+    if (err instanceof error) {
+      return catchFun()
+    } else {
+      throw err
+    }
+  }
+}

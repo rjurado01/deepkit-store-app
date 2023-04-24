@@ -5,6 +5,7 @@ import Router from 'express-promise-router'
 import bodyParser from 'body-parser'
 
 import {productsRouter} from './routes/products.route'
+import {authRouter} from './routes/auth.route'
 import {CriteriaValidationError} from '../../core/shared/domain/criteria'
 import {ClassValidationError} from '../../lib/class-attrs/validation/attr-error'
 import {NotFoundError} from '../../core/shared/domain/not-found.error'
@@ -21,6 +22,7 @@ router.get('/', (_req, res) => {
 })
 
 productsRouter.register(router)
+authRouter.register(router)
 
 router.use((err: unknown, _req: any, res: any, _next: unknown) => {
   if (err instanceof CriteriaValidationError) {

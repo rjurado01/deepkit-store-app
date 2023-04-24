@@ -3,7 +3,7 @@ import {Request, Response} from 'express'
 import {
   DeleteProductDto,
   DeleteProductService,
-} from '../../../core/products/app/delete-product.service'
+} from '../../../core/product/app/delete-product.service'
 
 import {injectable} from '../../../shared/decorators/injectable'
 

@@ -3,18 +3,20 @@ import {ProductNotFoundError} from '../domain/product-not-found.error'
 import {ProductCriteria, ProductFilter} from '../domain/product.criteria'
 import {Product} from '../domain/product.entity'
 import {ProductRepository} from '../domain/product.repository'
+import {randomUUID} from 'crypto'
 
 @Service()
 export class ProductInMemeoryRepository implements ProductRepository {
-  private products: Product[] = [
-    new Product({
-      id: '12dc6185-f3ca-4848-a1c9-3d339e2847a9',
-      name: 'Product 1',
-      description: 'Un producto muy bueno',
-      price: 9.99,
-      createdDate: new Date(),
-    }),
-  ]
+  private products: Product[] = [...Array(5)].map(
+    n =>
+      new Product({
+        id: randomUUID(),
+        name: `Product ${n}`,
+        description: `El producto número ${n}`,
+        price: parseFloat((Math.random() * 400).toFixed(2)),
+        createdDate: new Date(),
+      }),
+  )
 
   findAll(query?: ProductCriteria | undefined): Promise<Product[]> {
     let result = this.products
