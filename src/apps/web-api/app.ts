@@ -3,6 +3,7 @@ import 'reflect-metadata'
 import express from 'express'
 import Router from 'express-promise-router'
 import bodyParser from 'body-parser'
+import cors from 'cors'
 
 import {productsRouter} from './routes/products.route'
 import {authRouter} from './routes/auth.route'
@@ -16,6 +17,7 @@ const router = Router()
 const port = 3000
 
 app.use(bodyParser.json()) // must go before router
+app.use(cors())
 app.use(router)
 
 router.get('/', (_req, res) => {
