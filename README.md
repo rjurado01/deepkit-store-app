@@ -116,6 +116,14 @@ $ APP_FRAMEWORK_PORT=9090 APP_FRAMEWORK_HOST=127.0.0.1 node dist/app.js server:s
 * Editar un producto: `PUT /products/:id`
 * Eliminar un producto: `DELETE /products/:id`
 
+### Estructura criteria
+
+{
+  filter: {field: value, field2, value2, ...},
+  page: {size: 1, number:1},
+  order: {field: value, order: 'desc' | 'asc'}
+}
+
 ## Libs
 
 * https://github.com/koskimas/kysely

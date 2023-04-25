@@ -1,5 +1,6 @@
 import {AttrType} from '../constants'
 import {processDate} from '../types/date'
+import {processEnum} from '../types/enum'
 import {processFloat} from '../types/float'
 import {processInstance} from '../types/instance'
 import {processInteger} from '../types/integer'
@@ -26,7 +27,13 @@ export function processAttr(value: any, config: any) {
     case AttrType.Date:
       return processDate(value, config)
 
+    case AttrType.Date:
+      return processDate(value, config)
+
+    case AttrType.Enum:
+      return processEnum(value, config)
+
     default:
-      throw `Invalid type: ${config.type}`
+      throw `Unknow AttrType: ${config.type}`
   }
 }

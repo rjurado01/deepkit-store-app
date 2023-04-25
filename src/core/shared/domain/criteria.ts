@@ -11,6 +11,11 @@ export class CriteriaPage extends ValidatedClass<CriteriaPage> {
   number?: number
 }
 
+export enum CriteriaOrder {
+  Asc = 'asc',
+  Desc = 'desc',
+}
+
 export class Criteria<T> extends ValidatedClass<T> {
   readonly filter?: unknown
   readonly order?: unknown

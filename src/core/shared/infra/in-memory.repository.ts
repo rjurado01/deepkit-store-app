@@ -1,3 +1,5 @@
+import {CriteriaOrder} from '../domain/criteria'
+
 interface Criteria {
   filter?: {
     id?: string
@@ -6,6 +8,11 @@ interface Criteria {
   page?: {
     size?: number
     number?: number
+  }
+
+  order?: {
+    field: string
+    dir: CriteriaOrder
   }
 }
 
@@ -17,15 +24,11 @@ export abstract class InMemoryRepository<E extends Entity, C extends Criteria> {
   protected items: E[] = []
 
   findAll(query?: C | undefined): Promise<E[]> {
-    let result = this.items
+    let result = this.items.map(item => item) // avoid reference
 
-    if (query?.filter) {
-      result = this.applyFilter(query.filter, result)
-    }
-
-    if (query?.page) {
-      result = this.applyPagination(query.page, result)
-    }
+    if (query?.filter) result = this.applyFilter(query.filter, result)
+    if (query?.page) result = this.applyPagination(query.page, result)
+    if (query?.order) result = this.applyOrder(query.order, result)
 
     return Promise.resolve(result)
   }
@@ -65,6 +68,19 @@ export abstract class InMemoryRepository<E extends Entity, C extends Criteria> {
   }
 
   protected abstract applyFilter(filter: C['filter'], items: E[]): E[]
+
+  protected applyOrder(order: C['order'], items: E[]): E[] {
+    if (!order) return items
+
+    const dirValue = order.dir === CriteriaOrder.Asc ? 1 : -1
+
+    return items.sort((a: Record<string, any>, b: Record<string, any>) => {
+      if (a[order.field] > b[order.field]) return dirValue
+      if (a[order.field] < b[order.field]) return dirValue * -1
+
+      return 0
+    })
+  }
 
   protected applyPagination(page: C['page'], items: E[]): E[] {
     const number = (page?.number || 1) - 1
