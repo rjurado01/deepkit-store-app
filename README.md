@@ -102,28 +102,6 @@ $ APP_FRAMEWORK_PORT=9090 APP_FRAMEWORK_HOST=127.0.0.1 node dist/app.js server:s
 2022-08-07T21:38:45.744Z [LOG] HTTP listening at http://127.0.0.1:9090
 ```
 
-## Dist
-
-* Instala las dependencias con: `yarn install`
-* Ejecuta el servidor con: `node dist/apps/web-api/app.js`
-
-### Recursos
-
-* Crear sesión: `POST /sessions`
-* Obtener estadísticas: `GET /stats`
-* Listado de productos: `GET /products`
-* Crear un producto: `POST /products`
-* Editar un producto: `PUT /products/:id`
-* Eliminar un producto: `DELETE /products/:id`
-
-### Estructura criteria
-
-{
-  filter: {field: value, field2, value2, ...},
-  page: {size: 1, number:1},
-  order: {field: value, order: 'desc' | 'asc'}
-}
-
 ## Libs
 
 * https://github.com/koskimas/kysely

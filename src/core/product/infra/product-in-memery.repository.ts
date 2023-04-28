@@ -33,7 +33,9 @@ export class ProductInMemeoryRepository
       const search =
         !filter?.search || item.name.toLowerCase().includes(filter.search.toLowerCase())
 
-      return id && search
+      const priceLT = !filter?.priceLT || item.price < filter.priceLT
+
+      return id && search && priceLT
     })
   }
 

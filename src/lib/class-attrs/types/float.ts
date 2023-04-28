@@ -16,7 +16,7 @@ function checkPresence(val: any, config: FloatConfig) {
 }
 
 function checkType(val: any) {
-  if (typeof val !== 'number' && !isNaN(val)) {
+  if (typeof val !== 'number' && isNaN(val)) {
     throw new ConstraintError(ConstraintErrorCode.NotFloat)
   }
 }
