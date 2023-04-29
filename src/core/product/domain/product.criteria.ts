@@ -6,7 +6,7 @@ import {
   isUuid,
   ValidatedClass,
 } from '../../../lib/class-attrs'
-import {CriteriaOrder, CriteriaPage} from '../../shared/domain/criteria'
+import {Criteria, CriteriaOrder, CriteriaPage} from '../../shared/domain/criteria'
 
 export class ProductFilter extends ValidatedClass<ProductFilter> {
   @isUuid({optional: true})
@@ -27,7 +27,7 @@ export class ProductOrder extends ValidatedClass<ProductFilter> {
   readonly dir: CriteriaOrder
 }
 
-export class ProductCriteria extends ValidatedClass<ProductCriteria> {
+export class ProductCriteria extends Criteria<ProductCriteria> {
   @isInstance({of: ProductFilter, optional: true, cast: true})
   readonly filter?: ProductFilter
 
