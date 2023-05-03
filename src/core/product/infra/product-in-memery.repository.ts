@@ -1,12 +1,12 @@
-import {randomUUID} from 'crypto'
-import {Service} from 'diod'
+import {injectable} from '../../../shared/decorators/injectable'
+import {seedProducts} from '../../shared/infra/in-memory-seed'
 import {InMemoryRepository} from '../../shared/infra/in-memory.repository'
 import {ProductNotFoundError} from '../domain/product-not-found.error'
 import {ProductCriteria, ProductFilter} from '../domain/product.criteria'
 import {Product} from '../domain/product.entity'
 import {ProductRepository} from '../domain/product.repository'
 
-@Service()
+@injectable()
 export class ProductInMemeoryRepository
   extends InMemoryRepository<Product, ProductCriteria>
   implements ProductRepository
@@ -14,16 +14,7 @@ export class ProductInMemeoryRepository
   constructor() {
     super()
 
-    this.items = [1, 2, 3, 4, 5].map(
-      n =>
-        new Product({
-          id: randomUUID(),
-          name: `Product ${n}`,
-          description: `El producto número ${n}`,
-          price: parseFloat((Math.random() * 400).toFixed(2)),
-          createdDate: new Date(),
-        }),
-    )
+    this.items = seedProducts
   }
 
   protected applyFilter(filter: ProductFilter, products: Product[]) {

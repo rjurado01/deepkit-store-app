@@ -4,6 +4,9 @@ export class Product extends ValidatedClass<Product> {
   @isUuid()
   readonly id: string
 
+  @isUuid()
+  readonly categoryId: string
+
   @isString()
   readonly name: string
 

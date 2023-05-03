@@ -1,5 +1,8 @@
+import {ClassConstructor} from '../../../types/global'
+
 export enum ConstraintErrorCode {
   IsEmpty = 'IsEmpty',
+  IsInvalid = 'IsInvalid',
 
   NotString = 'NotString',
   MaxLength = 'MaxLength',
@@ -33,5 +36,45 @@ export class ClassValidationError extends Error {
     super(msg)
 
     this.errors = errors
+  }
+}
+
+export class ClassValidation<T extends object> {
+  readonly errors: AttrError[]
+  readonly klass: ClassConstructor<T>
+
+  constructor(klass: ClassConstructor<T>) {
+    this.klass = klass
+    this.errors = []
+  }
+
+  addError(error: AttrError) {
+    this.errors.push(error)
+  }
+
+  catchAttrError(err: unknown) {
+    if (err instanceof AttrError) {
+      this.addError(err)
+    } else {
+      throw err
+    }
+  }
+
+  catchValidationError(err: unknown) {
+    if (err instanceof ClassValidationError) {
+      err.errors.forEach(this.addError)
+    } else {
+      throw err
+    }
+  }
+
+  hasErrors() {
+    return Object.keys(this.errors).length > 0
+  }
+
+  ensureIsValid() {
+    if (this.hasErrors()) {
+      throw new ClassValidationError(`Invalid ${this.klass.name}`, this.errors)
+    }
   }
 }

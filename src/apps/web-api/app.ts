@@ -6,6 +6,7 @@ import bodyParser from 'body-parser'
 import cors from 'cors'
 
 import {productsRouter} from './routes/products.route'
+import {productCategoriesRouter} from './routes/product-categories.route'
 import {authRouter} from './routes/auth.route'
 import {CriteriaValidationError} from '../../core/shared/domain/criteria'
 import {ClassValidationError} from '../../lib/class-attrs/validation/attr-error'
@@ -25,6 +26,7 @@ router.get('/', (_req, res) => {
 })
 
 productsRouter.register(router)
+productCategoriesRouter.register(router)
 authRouter.register(router)
 generalRouter.register(router)
 

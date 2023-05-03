@@ -1,15 +1,21 @@
 import {ContainerBuilder} from 'diod'
+import {ListProductCategoriesService} from '../../core/product-category/app/list-product-categories.service'
+import {ShowProductCategoryService} from '../../core/product-category/app/show-product-category.service'
+import {ProductCategoryRepository} from '../../core/product-category/domain/product-category.repository'
+import {ProductCategoryInMemeoryRepository} from '../../core/product-category/infra/product-category-in-memery.repository'
 import {CreateProductService} from '../../core/product/app/create-product.service'
 import {DeleteProductService} from '../../core/product/app/delete-product.service'
-
 import {ListProductsService} from '../../core/product/app/list-products.service'
 import {ShowProductService} from '../../core/product/app/show-product.service'
 import {UpdateProductService} from '../../core/product/app/update-product.service'
+import {ProductExternalServicesIntegration} from '../../core/product/domain/product-external-modules.integration'
 import {ProductRepository} from '../../core/product/domain/product.repository'
+import {ProductExternalServicesImportIntegration} from '../../core/product/infra/product-external-services-import.integration'
 import {ProductInMemeoryRepository} from '../../core/product/infra/product-in-memery.repository'
 import {ShowUserService} from '../../core/user/app/show-user.service'
 import {UserRepository} from '../../core/user/domain/user.repository'
 import {UserInMemeoryRepository} from '../../core/user/infra/user-in-memery.repository'
+import {ProductCategoriesListController} from './controllers/product-categories-list.controller'
 import {ProductsCreateController} from './controllers/products-create.controller'
 import {ProductsDeleteController} from './controllers/products-delete.controller'
 import {ProductsListController} from './controllers/products-list.controller'
@@ -22,6 +28,10 @@ import {ShowStatsService} from './services/show-stats.service'
 
 function registerProductModule(builder: ContainerBuilder) {
   builder.register(ProductRepository).use(ProductInMemeoryRepository).asSingleton()
+  builder
+    .register(ProductExternalServicesIntegration)
+    .use(ProductExternalServicesImportIntegration)
+    .asSingleton()
 
   builder.registerAndUse(ListProductsService)
   builder.registerAndUse(ShowProductService)
@@ -34,6 +44,15 @@ function registerProductModule(builder: ContainerBuilder) {
   builder.registerAndUse(ProductsCreateController)
   builder.registerAndUse(ProductsUpdateController)
   builder.registerAndUse(ProductsDeleteController)
+}
+
+function registerProductCategoryModule(builder: ContainerBuilder) {
+  builder.register(ProductCategoryRepository).use(ProductCategoryInMemeoryRepository).asSingleton()
+
+  builder.registerAndUse(ShowProductCategoryService)
+  builder.registerAndUse(ListProductCategoriesService)
+
+  builder.registerAndUse(ProductCategoriesListController)
 }
 
 function registerUserModule(builder: ContainerBuilder) {
@@ -57,6 +76,7 @@ function registerGeneralModule(builder: ContainerBuilder) {
 const builder = new ContainerBuilder()
 
 registerProductModule(builder)
+registerProductCategoryModule(builder)
 registerUserModule(builder)
 registerAuthModule(builder)
 registerGeneralModule(builder)
