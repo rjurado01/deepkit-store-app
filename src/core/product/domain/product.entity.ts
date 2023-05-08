@@ -19,6 +19,9 @@ export class Product extends ValidatedClass<Product> {
   @isDate()
   readonly createdDate: Date = new Date()
 
+  @isString({optional: true})
+  readonly photoPath?: string
+
   // METHODS
 
   update(data: Partial<Omit<Properties<Product>, 'id' | 'createdDate'>>) {

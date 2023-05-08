@@ -1,4 +1,5 @@
 import {IRouter} from 'express'
+import multer from 'multer'
 import {ProductsCreateController} from '../controllers/products-create.controller'
 import {ProductsDeleteController} from '../controllers/products-delete.controller'
 import {ProductsListController} from '../controllers/products-list.controller'
@@ -7,7 +8,7 @@ import {ProductsUpdateController} from '../controllers/products-update.controlle
 import {container} from '../di-container'
 
 const productsRouter = {
-  register: (router: IRouter) => {
+  register: (router: IRouter, upload: multer.Multer) => {
     const listController = container.get(ProductsListController)
     const showController = container.get(ProductsShowController)
     const createController = container.get(ProductsCreateController)
@@ -15,7 +16,7 @@ const productsRouter = {
     const deleteController = container.get(ProductsDeleteController)
 
     router.get('/products', listController.run.bind(listController))
-    router.post('/products', createController.run.bind(createController))
+    router.post('/products', upload.single('photo'), createController.run.bind(createController))
     router.get('/products/:id', showController.run.bind(showController))
     router.put('/products/:id', updateController.run.bind(updateController))
     router.delete('/products/:id', deleteController.run.bind(deleteController))

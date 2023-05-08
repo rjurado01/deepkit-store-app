@@ -4,6 +4,7 @@ import express from 'express'
 import Router from 'express-promise-router'
 import bodyParser from 'body-parser'
 import cors from 'cors'
+import multer from 'multer'
 
 import {productsRouter} from './routes/products.route'
 import {productCategoriesRouter} from './routes/product-categories.route'
@@ -16,6 +17,7 @@ import {generalRouter} from './routes/general.route'
 const app = express()
 const router = Router()
 const port = 3000
+const upload = multer({dest: 'uploads/'})
 
 app.use(bodyParser.json()) // must go before router
 app.use(cors())
@@ -25,7 +27,7 @@ router.get('/', (_req, res) => {
   res.send('Hello World 2!')
 })
 
-productsRouter.register(router)
+productsRouter.register(router, upload)
 productCategoriesRouter.register(router)
 authRouter.register(router)
 generalRouter.register(router)

@@ -15,7 +15,9 @@ export class ProductsCreateController {
 
   @authenticated()
   async run(req: CustomRequest, res: Response) {
-    const dto = new CreateProductDto(req.body)
+    const body = req.body as Properties<CreateProductDto>
+    const data: Properties<CreateProductDto> = {...body, photoPath: req.file?.path}
+    const dto = new CreateProductDto(data)
 
     await this.service.run(dto)
 
