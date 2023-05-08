@@ -6,14 +6,14 @@ import {
 } from '../../../core/product/app/create-product.service'
 
 import {injectable} from '../../../shared/decorators/injectable'
-// import {authenticated} from '../guards/authenticated.guard'
+import {authenticated} from '../guards/authenticated.guard'
 import {CustomRequest} from '../interfaces'
 
 @injectable()
 export class ProductsCreateController {
   constructor(private service: CreateProductService) {}
 
-  // @authenticated()
+  @authenticated()
   async run(req: CustomRequest, res: Response) {
     const dto = new CreateProductDto(req.body)
 
