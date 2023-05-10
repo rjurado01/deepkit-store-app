@@ -21,6 +21,7 @@ import {ProductsDeleteController} from './controllers/products-delete.controller
 import {ProductsListController} from './controllers/products-list.controller'
 import {ProductsShowController} from './controllers/products-show.controller'
 import {ProductsUpdateController} from './controllers/products-update.controller'
+import {ProfileShowController} from './controllers/profile-show.controller'
 import {SessionsCreateController} from './controllers/sessions-create.controller'
 import {StatsShowController} from './controllers/stats-show.controller'
 import {CreateSessionService} from './services/create-session.service'
@@ -57,6 +58,8 @@ function registerProductCategoryModule(builder: ContainerBuilder) {
 
 function registerUserModule(builder: ContainerBuilder) {
   builder.register(UserRepository).use(UserInMemeoryRepository).asSingleton()
+
+  builder.registerAndUse(ProfileShowController)
 
   builder.registerAndUse(ShowUserService)
 }
