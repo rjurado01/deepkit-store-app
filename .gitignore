@@ -1,5 +1,7 @@
 node_modules
-dist
+dist/**
 !dist/README.md
 !dist/package.json
 yarn-error.log
+uploads/**
+!.keep

@@ -26,6 +26,6 @@ export class CreateSessionService {
 
   private generateAccessToken(payload: {id: string}): string {
     // TODO: coger el token de un objeto config
-    return jwt.sign(payload, 'process.env.TOKEN_SECRET', {expiresIn: '1800s'})
+    return jwt.sign(payload, 'process.env.TOKEN_SECRET', {expiresIn: '3600s'})
   }
 }

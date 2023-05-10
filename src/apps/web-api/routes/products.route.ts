@@ -5,6 +5,7 @@ import {ProductsListController} from '../controllers/products-list.controller'
 import {ProductsShowController} from '../controllers/products-show.controller'
 import {ProductsUpdateController} from '../controllers/products-update.controller'
 import {container} from '../di-container'
+import {upload} from '../services/upload'
 
 const productsRouter = {
   register: (router: IRouter) => {
@@ -15,7 +16,7 @@ const productsRouter = {
     const deleteController = container.get(ProductsDeleteController)
 
     router.get('/products', listController.run.bind(listController))
-    router.post('/products', createController.run.bind(createController))
+    router.post('/products', upload.single('photo'), createController.run.bind(createController))
     router.get('/products/:id', showController.run.bind(showController))
     router.put('/products/:id', updateController.run.bind(updateController))
     router.delete('/products/:id', deleteController.run.bind(deleteController))

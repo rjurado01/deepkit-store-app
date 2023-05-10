@@ -45,6 +45,8 @@ router.use((err: unknown, _req: any, res: any, _next: unknown) => {
   }
 })
 
+router.use('/uploads', express.static('uploads'))
+
 app.listen(port, () => {
   // eslint-disable-next-line no-console
   console.log(`Example app listening on port ${port}`)

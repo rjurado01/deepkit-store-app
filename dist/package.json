@@ -1,0 +1,17 @@
+{
+  "name": "api",
+  "version": "0.0.1",
+  "description": "My new application",
+  "private": true,
+  "type": "commonjs",
+  "main": "./dist/app.js",
+  "dependencies": {
+    "body-parser": "^1.20.2",
+    "cors": "^2.8.5",
+    "diod": "^2.0.0",
+    "express": "^4.18.2",
+    "express-promise-router": "^4.1.1",
+    "jsonwebtoken": "^9.0.0",
+    "reflect-metadata": "^0.1.13"
+  }
+}

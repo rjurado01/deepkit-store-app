@@ -69,7 +69,6 @@ function registerAuthModule(builder: ContainerBuilder) {
 
 function registerGeneralModule(builder: ContainerBuilder) {
   builder.registerAndUse(ShowStatsService)
-
   builder.registerAndUse(StatsShowController)
 }
 

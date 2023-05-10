@@ -20,6 +20,9 @@ export class CreateProductDto extends ValidatedClass<CreateProductDto> {
 
   @isString()
   readonly description?: string
+
+  @isString({optional: true})
+  readonly photoPath?: string
 }
 
 @injectable()
