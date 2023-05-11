@@ -8,6 +8,7 @@
 Session:
 
 * Crear sesión: `POST /sessions`
+* Obtener mi información: `GET /profile`
 
 Categorias de Productos:
 
